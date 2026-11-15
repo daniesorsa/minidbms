@@ -1,0 +1,18 @@
+# Archivos compilados de Java
+target/
+build/
+*.class
+
+# Configuraciones locales de NetBeans
+
+# Archivos binarios de prueba locales
+.dat
+*.idx
+*.tmp
+
+# Archivos de Exportación
+*.csv
+*.xlsx
+*.json
+*.xml
+*.xsd
