@@ -21,8 +21,7 @@ Id de netbeans: edu.unitec
 El flujo siempre va de arriba hacia abajo:
 $$\text{UI (Ventanas)} \longrightarrow \text{Lógica (BTree / AvailList)} \longrightarrow \text{Storage (Disco)}$$
 ---
-- Para este proyecto
-- 
+## Estructura Para Este Proyecto
 ```
 minidbms/                        <-- Raíz del repositorio Git
 ├── pom.xml                      <-- Archivo de Maven (configuración y librerías del proyecto)
@@ -47,6 +46,7 @@ minidbms/                        <-- Raíz del repositorio Git
 
 ```
 ---
+## Usos de Git
 
 ```bash
 # Clonar
