@@ -17,9 +17,10 @@ Id de netbeans: edu.unitec
 | service (controller / manager)  | Lógica de negocio: Coordina operaciones, aplica reglas, manipula estructuras (btree, availlist) y solicita lecturas/escrituras a storage. | ArbolB, AvailListManager, GestorBaseDatos (cruces y llaves foráneas).   |
 | storage (dao / repository / io) | Persistencia: Único paquete que lee y escribe bytes en disco (RandomAccessFile) y gestiona flujos de archivos externos.                   | ArchivoDatosIO, ArchivoIndiceIO, SerializadorMetadata, exportadores.    |
 | util (common / helper)          | Herramientas transversales: Funciones de apoyo reutilizables por cualquier paquete del proyecto.                                          | GestorHistorial (Ctrl+Z), ValidadorTipos, conversores de bytes.         |
+---
 El flujo siempre va de arriba hacia abajo:
 $$\text{UI (Ventanas)} \longrightarrow \text{Lógica (BTree / AvailList)} \longrightarrow \text{Storage (Disco)}$$
-
+---
 - Para este proyecto
 ---
 minidbms/                        <-- Raíz del repositorio Git
