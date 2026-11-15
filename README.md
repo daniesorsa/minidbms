@@ -22,7 +22,8 @@ El flujo siempre va de arriba hacia abajo:
 $$\text{UI (Ventanas)} \longrightarrow \text{Lógica (BTree / AvailList)} \longrightarrow \text{Storage (Disco)}$$
 ---
 - Para este proyecto
----
+- 
+```
 minidbms/                        <-- Raíz del repositorio Git
 ├── pom.xml                      <-- Archivo de Maven (configuración y librerías del proyecto)
 ├── .gitignore                   <-- Lista de archivos que Git debe ignorar
@@ -44,6 +45,7 @@ minidbms/                        <-- Raíz del repositorio Git
     └── test/
         └── java/                <-- Pruebas pequeñas (ej. probar el Árbol B sin abrir ventanas)
 
+```
 ---
 
 ```bash
