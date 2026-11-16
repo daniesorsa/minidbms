@@ -52,35 +52,43 @@ minidbms/                        <-- Raíz del repositorio Git
 # Clonar
 git clone https://github.com/daniesorsa/minidbms.git
 
+# limpiar configuración ip
+ipconfig /flushdns
+git config --global --unset http.proxy
+git config --global --unset https.proxy
+
 # Secuencia para subir avances
 
-# Antes de empezar
+## Antes de empezar
 git checkout develop # Moverse a esta rama
 git pull origin develop # Actualizar esta rama de manera local
 git checkout -b feature/tareaactual # Nueva rama para cada objetivo, nombre del objetivo luego de '/'
 
-# Agregando cambios
+## Agregando cambios
 git add .
 git commit -m "Implementa..."
 
-# Push
-git push -u origin feature/tareaactual
+### Push la primera vez
+git push --set-upstream origin feature/tareaactual
+
+### Push de ahí en adelante
+git push
 
 
-#Eliminar Ramas
+## Eliminar Ramas
 
-# Chequear estado de merge
+## Chequear estado de merge
 git branch --no-merged
 
-# Eliminar rama de manera local
+## Eliminar rama de manera local
 git branch -d nombre_de_la_rama
 # cambiar a -D para eliminar sin subir cambios
 
-# Eliminar rama del repo
+## Eliminar rama del repo
 git push origin --delete nombre_de_la_rama
 
-# Comprobar que ya no existe
+## Comprobar que ya no existe
 git branch -r # branch lista todas las ramas, -r las del remoto
 
-# Pull Request: En la página web de GitHub: 1) Pull Request (PR) de `feature/tareaactual` hacia `develop`. 2) Revisar que no haya archivos `.form` rotos ni errores -> clic a Merge
+### Pull Request: En la página web de GitHub: 1) Pull Request (PR) de `feature/tareaactual` hacia `develop`. 2) Revisar que no haya archivos `.form` rotos ni errores -> clic a Merge
 ```
