@@ -59,17 +59,22 @@ git config --global --unset https.proxy
 
 # Secuencia para subir avances
 
-## Antes de empezar
-git checkout develop # Moverse a esta rama
+## Antes de empezar -> Solo 1 vez
+git checkout -b develop # Moverse a esta rama
 git pull origin develop # Actualizar esta rama de manera local
-git checkout -b feature/tareaactual # Nueva rama para cada objetivo, nombre del objetivo luego de '/'
+
+# De ahí en adelante...
+git checkout develop
+git pull origin develop
+
+# El merge lo hacemos más adelante
 
 ## Agregando cambios
 git add .
 git commit -m "Implementa..."
 
 ### Push la primera vez
-git push --set-upstream origin feature/tareaactual
+git push -u origin develop
 
 ### Push de ahí en adelante
 git push
@@ -90,5 +95,5 @@ git push origin --delete nombre_de_la_rama
 ## Comprobar que ya no existe
 git branch -r # branch lista todas las ramas, -r las del remoto
 
-### Pull Request: En la página web de GitHub: 1) Pull Request (PR) de `feature/tareaactual` hacia `develop`. 2) Revisar que no haya archivos `.form` rotos ni errores -> clic a Merge
+### Pull Request: En la página web de GitHub: 1) Pull Request (PR) de `develop` hacia `main`. 2) Revisar que no haya archivos `.form` rotos ni errores -> clic a Merge
 ```
