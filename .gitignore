@@ -14,5 +14,4 @@ build/
 *.csv
 *.xlsx
 *.json
-*.xml
 *.xsd
