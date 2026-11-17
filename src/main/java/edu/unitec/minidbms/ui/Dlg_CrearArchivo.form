@@ -58,26 +58,20 @@
                           </Group>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lbl_PoliticaReutilizacion" min="-2" max="-2" attributes="0"/>
-                              <Component id="lbl_TamMin" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="lbl_PoliticaReutilizacion" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="cmb_politicaReuti" pref="99" max="32767" attributes="0"/>
-                              <Component id="spn_tamMin" max="32767" attributes="0"/>
-                          </Group>
+                          <Component id="cmb_politicaReuti" pref="99" max="32767" attributes="0"/>
                           <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace max="32767" attributes="0"/>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
                   <Component id="btn_CrearArchivo" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="btn_Cancelar" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -100,17 +94,12 @@
                       <Component id="lbl_PoliticaReutilizacion" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="cmb_politicaReuti" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="lbl_TamMin" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="spn_tamMin" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                  <EmptySpace pref="27" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="btn_CrearArchivo" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btn_Cancelar" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="32" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -131,11 +120,6 @@
             <Property name="text" type="java.lang.String" value="Politica de Reutilizacion:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lbl_TamMin">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Tama&#xf1;o Minimo Hueco:"/>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JTextField" name="fld_nombre">
         </Component>
         <Component class="javax.swing.JTextField" name="fld_carpeta">
@@ -152,13 +136,6 @@
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;PoliticaDeReutilizacion&gt;"/>
           </AuxValues>
-        </Component>
-        <Component class="javax.swing.JSpinner" name="spn_tamMin">
-          <Properties>
-            <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
-              <SpinnerModel initial="0" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
-            </Property>
-          </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="btn_FileChooser">
           <Properties>

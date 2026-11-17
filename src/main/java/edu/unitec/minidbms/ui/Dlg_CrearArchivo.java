@@ -15,7 +15,6 @@ public class Dlg_CrearArchivo extends javax.swing.JDialog {
     String nombre;
     String fileDirectory;
     PoliticaDeReutilizacion politica;
-    int tamMin;
     boolean valid;
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Dlg_CrearArchivo.class.getName());
@@ -41,11 +40,9 @@ public class Dlg_CrearArchivo extends javax.swing.JDialog {
         lbl_Nombre = new javax.swing.JLabel();
         lbl_Carpeta = new javax.swing.JLabel();
         lbl_PoliticaReutilizacion = new javax.swing.JLabel();
-        lbl_TamMin = new javax.swing.JLabel();
         fld_nombre = new javax.swing.JTextField();
         fld_carpeta = new javax.swing.JTextField();
         cmb_politicaReuti = new javax.swing.JComboBox<>();
-        spn_tamMin = new javax.swing.JSpinner();
         btn_FileChooser = new javax.swing.JButton();
         btn_CrearArchivo = new javax.swing.JButton();
         btn_Cancelar = new javax.swing.JButton();
@@ -58,13 +55,9 @@ public class Dlg_CrearArchivo extends javax.swing.JDialog {
 
         lbl_PoliticaReutilizacion.setText("Politica de Reutilizacion:");
 
-        lbl_TamMin.setText("Tamaño Minimo Hueco:");
-
         fld_carpeta.setEditable(false);
 
         cmb_politicaReuti.setModel(new javax.swing.DefaultComboBoxModel<>(PoliticaDeReutilizacion.values()));
-
-        spn_tamMin.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
 
         btn_FileChooser.setText("...");
         btn_FileChooser.addActionListener(this::btn_FileChooserActionPerformed);
@@ -95,21 +88,17 @@ public class Dlg_CrearArchivo extends javax.swing.JDialog {
                                 .addComponent(btn_FileChooser)
                                 .addGap(1, 1, 1))))
                     .addGroup(pnl_backgroudLayout.createSequentialGroup()
-                        .addGroup(pnl_backgroudLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbl_PoliticaReutilizacion)
-                            .addComponent(lbl_TamMin, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lbl_PoliticaReutilizacion)
                         .addGap(18, 18, 18)
-                        .addGroup(pnl_backgroudLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cmb_politicaReuti, 0, 99, Short.MAX_VALUE)
-                            .addComponent(spn_tamMin))
+                        .addComponent(cmb_politicaReuti, 0, 99, Short.MAX_VALUE)
                         .addGap(1, 1, 1)))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_backgroudLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(pnl_backgroudLayout.createSequentialGroup()
+                .addGap(49, 49, 49)
                 .addComponent(btn_CrearArchivo)
                 .addGap(18, 18, 18)
                 .addComponent(btn_Cancelar)
-                .addGap(46, 46, 46))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnl_backgroudLayout.setVerticalGroup(
             pnl_backgroudLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -127,15 +116,11 @@ public class Dlg_CrearArchivo extends javax.swing.JDialog {
                 .addGroup(pnl_backgroudLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl_PoliticaReutilizacion)
                     .addComponent(cmb_politicaReuti, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(pnl_backgroudLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbl_TamMin)
-                    .addComponent(spn_tamMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addGroup(pnl_backgroudLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_CrearArchivo)
                     .addComponent(btn_Cancelar))
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addGap(24, 24, 24))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -197,10 +182,6 @@ public class Dlg_CrearArchivo extends javax.swing.JDialog {
         return politica;
     }
     
-    public int getTamMin(){
-        return tamMin;
-    }
-    
     public boolean getValid(){
         return valid;
     }
@@ -251,8 +232,6 @@ public class Dlg_CrearArchivo extends javax.swing.JDialog {
     private javax.swing.JLabel lbl_Carpeta;
     private javax.swing.JLabel lbl_Nombre;
     private javax.swing.JLabel lbl_PoliticaReutilizacion;
-    private javax.swing.JLabel lbl_TamMin;
     private javax.swing.JPanel pnl_backgroud;
-    private javax.swing.JSpinner spn_tamMin;
     // End of variables declaration//GEN-END:variables
 }
