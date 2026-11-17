@@ -29,8 +29,8 @@ public class FormPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         pnl_Fondo = new javax.swing.JPanel();
-        PanelDeArchivos = new javax.swing.JTabbedPane();
-        tab_BarraDeOpciones = new javax.swing.JMenuBar();
+        tab_PanelDeArchivos = new javax.swing.JTabbedPane();
+        mnuBar_Opciones = new javax.swing.JMenuBar();
         mnu_Archivo = new javax.swing.JMenu();
         mni_CrearArchivo = new javax.swing.JMenuItem();
         mni_AbrirArchivo = new javax.swing.JMenuItem();
@@ -51,6 +51,13 @@ public class FormPrincipal extends javax.swing.JFrame {
         mni_ListarReg = new javax.swing.JMenuItem();
         mni_CargarRegPrueba = new javax.swing.JMenuItem();
         mni_CruzarArchivos = new javax.swing.JMenuItem();
+        mnu_Visualizar = new javax.swing.JMenu();
+        mni_ArbolB = new javax.swing.JMenuItem();
+        mni_AvailList = new javax.swing.JMenuItem();
+        mni_Mapa = new javax.swing.JMenuItem();
+        mnu_Exportar = new javax.swing.JMenu();
+        mni_JSON = new javax.swing.JMenuItem();
+        mni_XML = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -58,11 +65,11 @@ public class FormPrincipal extends javax.swing.JFrame {
         pnl_Fondo.setLayout(pnl_FondoLayout);
         pnl_FondoLayout.setHorizontalGroup(
             pnl_FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PanelDeArchivos, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addComponent(tab_PanelDeArchivos, javax.swing.GroupLayout.DEFAULT_SIZE, 570, Short.MAX_VALUE)
         );
         pnl_FondoLayout.setVerticalGroup(
             pnl_FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PanelDeArchivos, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)
+            .addComponent(tab_PanelDeArchivos, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)
         );
 
         mnu_Archivo.setText("Archivo");
@@ -83,7 +90,7 @@ public class FormPrincipal extends javax.swing.JFrame {
         mni_Salir.addActionListener(this::mni_SalirActionPerformed);
         mnu_Archivo.add(mni_Salir);
 
-        tab_BarraDeOpciones.add(mnu_Archivo);
+        mnuBar_Opciones.add(mnu_Archivo);
 
         mnu_Campos.setText("Campos");
 
@@ -102,7 +109,7 @@ public class FormPrincipal extends javax.swing.JFrame {
         mni_BorrarCampo.setText("Borrar Campo");
         mnu_Campos.add(mni_BorrarCampo);
 
-        tab_BarraDeOpciones.add(mnu_Campos);
+        mnuBar_Opciones.add(mnu_Campos);
 
         mnu_Registros.setText("Registros");
 
@@ -127,9 +134,32 @@ public class FormPrincipal extends javax.swing.JFrame {
         mni_CruzarArchivos.setText("Cruzar Archivos");
         mnu_Registros.add(mni_CruzarArchivos);
 
-        tab_BarraDeOpciones.add(mnu_Registros);
+        mnuBar_Opciones.add(mnu_Registros);
 
-        setJMenuBar(tab_BarraDeOpciones);
+        mnu_Visualizar.setText("Visualizar");
+
+        mni_ArbolB.setText("Arbol B");
+        mnu_Visualizar.add(mni_ArbolB);
+
+        mni_AvailList.setText("Avail List");
+        mnu_Visualizar.add(mni_AvailList);
+
+        mni_Mapa.setText("Mapa Del Archivo");
+        mnu_Visualizar.add(mni_Mapa);
+
+        mnuBar_Opciones.add(mnu_Visualizar);
+
+        mnu_Exportar.setText("Exportar");
+
+        mni_JSON.setText("JSON");
+        mnu_Exportar.add(mni_JSON);
+
+        mni_XML.setText("XML");
+        mnu_Exportar.add(mni_XML);
+
+        mnuBar_Opciones.add(mnu_Exportar);
+
+        setJMenuBar(mnuBar_Opciones);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -175,9 +205,10 @@ public class FormPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTabbedPane PanelDeArchivos;
     private javax.swing.JMenuItem mni_AbrirArchivo;
     private javax.swing.JMenuItem mni_AgregarCampo;
+    private javax.swing.JMenuItem mni_ArbolB;
+    private javax.swing.JMenuItem mni_AvailList;
     private javax.swing.JMenuItem mni_BorrarCampo;
     private javax.swing.JMenuItem mni_BorrarReg;
     private javax.swing.JMenuItem mni_BuscarReg;
@@ -188,15 +219,21 @@ public class FormPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem mni_CruzarArchivos;
     private javax.swing.JMenuItem mni_GuardarArchivo;
     private javax.swing.JMenuItem mni_IntroducirReg;
+    private javax.swing.JMenuItem mni_JSON;
     private javax.swing.JMenuItem mni_ListarReg;
+    private javax.swing.JMenuItem mni_Mapa;
     private javax.swing.JMenuItem mni_ModificarReg;
     private javax.swing.JMenuItem mni_RedLongMax;
     private javax.swing.JMenuItem mni_RenombrarCampo;
     private javax.swing.JMenuItem mni_Salir;
+    private javax.swing.JMenuItem mni_XML;
+    private javax.swing.JMenuBar mnuBar_Opciones;
     private javax.swing.JMenu mnu_Archivo;
     private javax.swing.JMenu mnu_Campos;
+    private javax.swing.JMenu mnu_Exportar;
     private javax.swing.JMenu mnu_Registros;
+    private javax.swing.JMenu mnu_Visualizar;
     private javax.swing.JPanel pnl_Fondo;
-    private javax.swing.JMenuBar tab_BarraDeOpciones;
+    private javax.swing.JTabbedPane tab_PanelDeArchivos;
     // End of variables declaration//GEN-END:variables
 }
