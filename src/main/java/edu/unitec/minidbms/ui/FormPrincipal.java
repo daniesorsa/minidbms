@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package edu.unitec.minidbms.ui;
-
+import edu.unitec.minidbms.modelo.PoliticaDeReutilizacion;
 /**
  *
  * @author Jorge
@@ -183,6 +183,12 @@ public class FormPrincipal extends javax.swing.JFrame {
     private void mni_CrearArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mni_CrearArchivoActionPerformed
         Dlg_CrearArchivo dlg = new Dlg_CrearArchivo(this,true);
         dlg.setVisible(true);
+        if (dlg.getValid()) {
+            String nombre = dlg.getNombre();
+            String directory = dlg.getDirectory();
+            PoliticaDeReutilizacion politica = dlg.getPolitica();
+            int tamMin = dlg.getTamMin();
+        }
     }//GEN-LAST:event_mni_CrearArchivoActionPerformed
 
     /**

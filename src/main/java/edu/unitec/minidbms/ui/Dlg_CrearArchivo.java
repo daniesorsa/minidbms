@@ -3,12 +3,20 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
 package edu.unitec.minidbms.ui;
-
+import edu.unitec.minidbms.modelo.PoliticaDeReutilizacion;
+import javax.swing.JOptionPane;
+import java.io.File;
 /**
  *
  * @author Jorge
  */
 public class Dlg_CrearArchivo extends javax.swing.JDialog {
+    
+    String nombre;
+    String fileDirectory;
+    PoliticaDeReutilizacion politica;
+    int tamMin;
+    boolean valid;
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Dlg_CrearArchivo.class.getName());
 
@@ -30,84 +38,104 @@ public class Dlg_CrearArchivo extends javax.swing.JDialog {
     private void initComponents() {
 
         pnl_backgroud = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jSpinner1 = new javax.swing.JSpinner();
-        jButton1 = new javax.swing.JButton();
+        lbl_Nombre = new javax.swing.JLabel();
+        lbl_Carpeta = new javax.swing.JLabel();
+        lbl_PoliticaReutilizacion = new javax.swing.JLabel();
+        lbl_TamMin = new javax.swing.JLabel();
+        fld_nombre = new javax.swing.JTextField();
+        fld_carpeta = new javax.swing.JTextField();
+        cmb_politicaReuti = new javax.swing.JComboBox<>();
+        spn_tamMin = new javax.swing.JSpinner();
+        btn_FileChooser = new javax.swing.JButton();
+        btn_CrearArchivo = new javax.swing.JButton();
+        btn_Cancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setText("Nombre:");
+        lbl_Nombre.setText("Nombre:");
 
-        jLabel2.setText("Carpeta:");
+        lbl_Carpeta.setText("Carpeta:");
 
-        jLabel3.setText("Politica de Reutilizacion:");
+        lbl_PoliticaReutilizacion.setText("Politica de Reutilizacion:");
 
-        jLabel4.setText("Tamaño Minimo Hueco:");
+        lbl_TamMin.setText("Tamaño Minimo Hueco:");
 
-        jTextField1.setText("jTextField1");
+        fld_carpeta.setEditable(false);
 
-        jTextField2.setEditable(false);
-        jTextField2.setText("jTextField1");
+        cmb_politicaReuti.setModel(new javax.swing.DefaultComboBoxModel<>(PoliticaDeReutilizacion.values()));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        spn_tamMin.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
 
-        jButton1.setText("...");
+        btn_FileChooser.setText("...");
+        btn_FileChooser.addActionListener(this::btn_FileChooserActionPerformed);
+
+        btn_CrearArchivo.setText("Crear");
+        btn_CrearArchivo.addActionListener(this::btn_CrearArchivoActionPerformed);
+
+        btn_Cancelar.setText("Cancelar");
+        btn_Cancelar.addActionListener(this::btn_CancelarActionPerformed);
 
         javax.swing.GroupLayout pnl_backgroudLayout = new javax.swing.GroupLayout(pnl_backgroud);
         pnl_backgroud.setLayout(pnl_backgroudLayout);
         pnl_backgroudLayout.setHorizontalGroup(
             pnl_backgroudLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_backgroudLayout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addGroup(pnl_backgroudLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnl_backgroudLayout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pnl_backgroudLayout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(11, 11, 11)
+                .addGroup(pnl_backgroudLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(pnl_backgroudLayout.createSequentialGroup()
                         .addGroup(pnl_backgroudLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(lbl_Nombre)
+                            .addComponent(lbl_Carpeta))
+                        .addGap(18, 18, 18)
                         .addGroup(pnl_backgroudLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(fld_nombre)
                             .addGroup(pnl_backgroudLayout.createSequentialGroup()
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(fld_carpeta)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(68, Short.MAX_VALUE))
+                                .addComponent(btn_FileChooser)
+                                .addGap(1, 1, 1))))
+                    .addGroup(pnl_backgroudLayout.createSequentialGroup()
+                        .addGroup(pnl_backgroudLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbl_PoliticaReutilizacion)
+                            .addComponent(lbl_TamMin, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(pnl_backgroudLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cmb_politicaReuti, 0, 99, Short.MAX_VALUE)
+                            .addComponent(spn_tamMin))
+                        .addGap(1, 1, 1)))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_backgroudLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btn_CrearArchivo)
+                .addGap(18, 18, 18)
+                .addComponent(btn_Cancelar)
+                .addGap(46, 46, 46))
         );
         pnl_backgroudLayout.setVerticalGroup(
             pnl_backgroudLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_backgroudLayout.createSequentialGroup()
-                .addGap(42, 42, 42)
+                .addGap(32, 32, 32)
                 .addGroup(pnl_backgroudLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(39, 39, 39)
+                    .addComponent(lbl_Nombre)
+                    .addComponent(fld_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(pnl_backgroudLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
-                .addGap(38, 38, 38)
+                    .addComponent(lbl_Carpeta)
+                    .addComponent(fld_carpeta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_FileChooser))
+                .addGap(18, 18, 18)
                 .addGroup(pnl_backgroudLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(39, 39, 39)
+                    .addComponent(lbl_PoliticaReutilizacion)
+                    .addComponent(cmb_politicaReuti, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(pnl_backgroudLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(39, Short.MAX_VALUE))
+                    .addComponent(lbl_TamMin)
+                    .addComponent(spn_tamMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
+                .addGroup(pnl_backgroudLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_CrearArchivo)
+                    .addComponent(btn_Cancelar))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -124,6 +152,58 @@ public class Dlg_CrearArchivo extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btn_CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CancelarActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btn_CancelarActionPerformed
+
+    private void btn_CrearArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CrearArchivoActionPerformed
+        valid = false;
+        nombre = fld_nombre.getText();
+        if (nombre.isBlank()) {
+            JOptionPane.showMessageDialog(this, "Nombre esta en blanco!");
+            return;
+        }
+        fileDirectory = fld_carpeta.getText();
+        if (fileDirectory.isBlank()) {
+            JOptionPane.showMessageDialog(this, "Directorio esta en blanco!");
+            return;
+        }
+        politica = cmb_politicaReuti.getItemAt(cmb_politicaReuti.getSelectedIndex());
+        valid = true;
+        this.setVisible(false);
+    }//GEN-LAST:event_btn_CrearArchivoActionPerformed
+
+    private void btn_FileChooserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_FileChooserActionPerformed
+        javax.swing.JFileChooser fileChooser = new javax.swing.JFileChooser();
+        fileChooser.setFileSelectionMode(javax.swing.JFileChooser.DIRECTORIES_ONLY);
+        fileChooser.setDialogTitle("Seleccionar Donde Guardar Archivo");
+        
+        int result = fileChooser.showOpenDialog(null);
+        if (result == javax.swing.JFileChooser.APPROVE_OPTION) {
+            File selectedFile = fileChooser.getSelectedFile();
+            fld_carpeta.setText(selectedFile.getAbsolutePath());
+        }
+    }//GEN-LAST:event_btn_FileChooserActionPerformed
+
+    public String getNombre(){
+        return nombre;
+    }
+    
+    public String getDirectory(){
+        return fileDirectory;
+    }
+    
+    public PoliticaDeReutilizacion getPolitica(){
+        return politica;
+    }
+    
+    public int getTamMin(){
+        return tamMin;
+    }
+    
+    public boolean getValid(){
+        return valid;
+    }
     /**
      * @param args the command line arguments
      */
@@ -162,15 +242,17 @@ public class Dlg_CrearArchivo extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JButton btn_Cancelar;
+    private javax.swing.JButton btn_CrearArchivo;
+    private javax.swing.JButton btn_FileChooser;
+    private javax.swing.JComboBox<PoliticaDeReutilizacion> cmb_politicaReuti;
+    private javax.swing.JTextField fld_carpeta;
+    private javax.swing.JTextField fld_nombre;
+    private javax.swing.JLabel lbl_Carpeta;
+    private javax.swing.JLabel lbl_Nombre;
+    private javax.swing.JLabel lbl_PoliticaReutilizacion;
+    private javax.swing.JLabel lbl_TamMin;
     private javax.swing.JPanel pnl_backgroud;
+    private javax.swing.JSpinner spn_tamMin;
     // End of variables declaration//GEN-END:variables
 }
