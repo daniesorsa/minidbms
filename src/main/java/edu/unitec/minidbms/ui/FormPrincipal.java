@@ -75,6 +75,7 @@ public class FormPrincipal extends javax.swing.JFrame {
         mnu_Archivo.setText("Archivo");
 
         mni_CrearArchivo.setText("Crear");
+        mni_CrearArchivo.addActionListener(this::mni_CrearArchivoActionPerformed);
         mnu_Archivo.add(mni_CrearArchivo);
 
         mni_AbrirArchivo.setText("Abrir");
@@ -178,6 +179,11 @@ public class FormPrincipal extends javax.swing.JFrame {
     private void mni_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mni_SalirActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_mni_SalirActionPerformed
+
+    private void mni_CrearArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mni_CrearArchivoActionPerformed
+        Dlg_CrearArchivo dlg = new Dlg_CrearArchivo(this,true);
+        dlg.setVisible(true);
+    }//GEN-LAST:event_mni_CrearArchivoActionPerformed
 
     /**
      * @param args the command line arguments
