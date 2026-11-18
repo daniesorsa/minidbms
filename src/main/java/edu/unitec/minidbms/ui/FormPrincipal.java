@@ -193,7 +193,7 @@ public class FormPrincipal extends javax.swing.JFrame {
                JOptionPane.showMessageDialog(this, ex.getMessage(), "Error al crear", JOptionPane.ERROR_MESSAGE);
             }
         }
-        dlg.setVisible(false);
+        //dlg.setVisible(false);
     }//GEN-LAST:event_mni_CrearArchivoActionPerformed
 
     private void mni_CrearCampoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mni_CrearCampoActionPerformed

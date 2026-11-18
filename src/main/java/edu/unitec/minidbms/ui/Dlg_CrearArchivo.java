@@ -138,6 +138,8 @@ public class Dlg_CrearArchivo extends javax.swing.JDialog {
         }
         this.politica = cmb_politicaReuti.getItemAt(cmb_politicaReuti.getSelectedIndex());
         this.valid = true;
+        this.dispose();
+        this.setVisible(false);
     }//GEN-LAST:event_btn_CrearArchivoActionPerformed
 
     private void btn_FileChooserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_FileChooserActionPerformed
