@@ -1,6 +1,8 @@
 package edu.unitec.minidbms;
+import edu.unitec.minidbms.ui.FormPrincipal;
 public class Minidbms {
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        FormPrincipal form = new FormPrincipal();
+        form.setVisible(true);
     }
 }

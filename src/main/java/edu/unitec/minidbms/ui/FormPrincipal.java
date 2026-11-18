@@ -193,38 +193,42 @@ public class FormPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_mni_SalirActionPerformed
 
     private void mni_CrearArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mni_CrearArchivoActionPerformed
-        /*
         Dlg_CrearArchivo dlg = new Dlg_CrearArchivo(this,true);
         dlg.setVisible(true);
         if (dlg.getValid()) {
             String nombre = dlg.getNombre();
             Path path = Path.of(dlg.getDirectory());
             PoliticaDeReutilizacion politica = dlg.getPolitica();
-            crearArchivo(path.resolve(nombre+".dat"),politica);
-        }
-        */
-        try {
-            String nombre = JOptionPane.showInputDialog(this, "Ingrese el nombre:");
-            if (nombre == null || nombre.trim().isEmpty()) {
-                return;
+            System.out.println();
+            try{
+                gestor.crearArchivo(new File(path.resolve(nombre+".dat").toString()),nombre,politica);
             }
-            
-            JFileChooser fileChooser = new JFileChooser();
-            fileChooser.setFileSelectionMode(javax.swing.JFileChooser.DIRECTORIES_ONLY);
-
-            //fileChooser.setSelectedFile(new File(nombre.trim() + ".dat"));
-            
-            if (fileChooser.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
-                Path path = Path.of(fileChooser.getSelectedFile().getAbsolutePath());
-                path = path.resolve(nombre+".dat");
-                System.out.println(path);
-                File archivoFisico = new File(path.toString());
-                gestor.crearArchivo(archivoFisico, nombre.trim());
-                JOptionPane.showMessageDialog(this, "Archivo creado con exito! " + archivoFisico.getAbsolutePath());
+            catch(Exception ex){
+               JOptionPane.showMessageDialog(this, ex.getMessage(), "Error al crear", JOptionPane.ERROR_MESSAGE);
             }
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error al crear", JOptionPane.ERROR_MESSAGE);
         }
+//        try {
+//            String nombre = JOptionPane.showInputDialog(this, "Ingrese el nombre:");
+//            if (nombre == null || nombre.trim().isEmpty()) {
+//                return;
+//            }
+//            
+//            JFileChooser fileChooser = new JFileChooser();
+//            fileChooser.setFileSelectionMode(javax.swing.JFileChooser.DIRECTORIES_ONLY);
+//
+//            //fileChooser.setSelectedFile(new File(nombre.trim() + ".dat"));
+//            
+//            if (fileChooser.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
+//                Path path = Path.of(fileChooser.getSelectedFile().getAbsolutePath());
+//                path = path.resolve(nombre+".dat");
+//                System.out.println(path);
+//                File archivoFisico = new File(path.toString());
+//                gestor.crearArchivo(archivoFisico, nombre.trim());
+//                JOptionPane.showMessageDialog(this, "Archivo creado con exito! " + archivoFisico.getAbsolutePath());
+//            }
+//        } catch (Exception ex) {
+//            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error al crear", JOptionPane.ERROR_MESSAGE);
+//        }
     }//GEN-LAST:event_mni_CrearArchivoActionPerformed
 
     private void mni_CrearCampoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mni_CrearCampoActionPerformed
@@ -321,10 +325,6 @@ public class FormPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_mni_BorrarCampoActionPerformed
 
-    private void crearArchivo(Path directory, PoliticaDeReutilizacion politica){
-        MetaData metaData = new MetaData(directory.toString(),politica);
-        
-    }
     
     /**
      * @param args the command line arguments

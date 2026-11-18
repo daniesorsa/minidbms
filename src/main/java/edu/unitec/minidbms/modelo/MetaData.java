@@ -68,4 +68,46 @@ public class MetaData {
     public void setNombreArchivo(String nombreTabla){
         this.archivo = nombreTabla;
     }
+
+    public String getArchivo() {
+        return archivo;
+    }
+
+    public double getVersion() {
+        return version;
+    }
+
+    public boolean isLlaveEstablecida() {
+        return llaveEstablecida;
+    }
+
+    public ArrayList<IndiceDefinido> getIndices() {
+        return indices;
+    }
+
+    public ArrayList<LlaveForanea> getLlavesForaneas() {
+        return llavesForaneas;
+    }
+
+    public long getCabeza() {
+        return cabeza;
+    }
+
+    public PoliticaDeReutilizacion getEstrategia() {
+        return estrategia;
+    }
+
+    public long getRegistrosActivos() {
+        return registrosActivos;
+    }
+
+    public long getRegistrosEliminados() {
+        return registrosEliminados;
+    }
+
+    public long getBytesLibres() {
+        return bytesLibres;
+    }
+    
+    
 }
