@@ -144,19 +144,20 @@ public class Dlg_CrearArchivo extends javax.swing.JDialog {
     }//GEN-LAST:event_btn_CancelarActionPerformed
 
     private void btn_CrearArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CrearArchivoActionPerformed
-        valid = false;
-        nombre = fld_nombre.getText();
+        this.valid = false;
+        this.nombre = fld_nombre.getText();
         if (nombre.isBlank()) {
             JOptionPane.showMessageDialog(this, "Nombre esta en blanco!");
             return;
         }
-        fileDirectory = fld_carpeta.getText();
+        this.fileDirectory = fld_carpeta.getText();
         if (fileDirectory.isBlank()) {
             JOptionPane.showMessageDialog(this, "Directorio esta en blanco!");
             return;
         }
-        politica = cmb_politicaReuti.getItemAt(cmb_politicaReuti.getSelectedIndex());
-        valid = true;
+        this.politica = cmb_politicaReuti.getItemAt(cmb_politicaReuti.getSelectedIndex());
+        this.valid = true;
+        // CREAR, GUARDAR
         this.setVisible(false);
     }//GEN-LAST:event_btn_CrearArchivoActionPerformed
 

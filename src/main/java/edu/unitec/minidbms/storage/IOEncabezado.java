@@ -98,6 +98,9 @@ public class IOEncabezado {
         if (this.modificado) {
             guardarArchivo();
         }
+        else {
+            throw new Exception("Ningun archivo abierto o creado");
+        }
         this.md = null;
         this.archivoActual = null;
         this.modificado = false;
