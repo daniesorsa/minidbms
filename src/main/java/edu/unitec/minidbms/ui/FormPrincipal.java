@@ -4,14 +4,18 @@
  */
 package edu.unitec.minidbms.ui;
 import edu.unitec.minidbms.modelo.*;
+import edu.unitec.minidbms.storage.IOEncabezado;
+import edu.unitec.minidbms.modelo.TipoDato;
 import java.io.File;
 import java.nio.file.Path;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 /**
  *
  * @author Jorge
  */
 public class FormPrincipal extends javax.swing.JFrame {
-    
+    private IOEncabezado gestor; 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FormPrincipal.class.getName());
 
     /**
@@ -19,6 +23,7 @@ public class FormPrincipal extends javax.swing.JFrame {
      */
     public FormPrincipal() {
         initComponents();
+        this.gestor = new IOEncabezado();
     }
 
     /**
@@ -40,10 +45,9 @@ public class FormPrincipal extends javax.swing.JFrame {
         mni_CerrarArchivo = new javax.swing.JMenuItem();
         mni_Salir = new javax.swing.JMenuItem();
         mnu_Campos = new javax.swing.JMenu();
-        mni_AgregarCampo = new javax.swing.JMenuItem();
-        mni_RenombrarCampo = new javax.swing.JMenuItem();
-        mni_CambiarTipo = new javax.swing.JMenuItem();
-        mni_RedLongMax = new javax.swing.JMenuItem();
+        mni_CrearCampo = new javax.swing.JMenuItem();
+        mni_ListarCampo = new javax.swing.JMenuItem();
+        mni_ModificarCampo = new javax.swing.JMenuItem();
         mni_BorrarCampo = new javax.swing.JMenuItem();
         mnu_Registros = new javax.swing.JMenu();
         mni_IntroducirReg = new javax.swing.JMenuItem();
@@ -63,6 +67,8 @@ public class FormPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        tab_PanelDeArchivos.setBackground(new java.awt.Color(255, 204, 255));
+
         javax.swing.GroupLayout pnl_FondoLayout = new javax.swing.GroupLayout(pnl_Fondo);
         pnl_Fondo.setLayout(pnl_FondoLayout);
         pnl_FondoLayout.setHorizontalGroup(
@@ -81,12 +87,15 @@ public class FormPrincipal extends javax.swing.JFrame {
         mnu_Archivo.add(mni_CrearArchivo);
 
         mni_AbrirArchivo.setText("Abrir");
+        mni_AbrirArchivo.addActionListener(this::mni_AbrirArchivoActionPerformed);
         mnu_Archivo.add(mni_AbrirArchivo);
 
         mni_GuardarArchivo.setText("Guardar");
+        mni_GuardarArchivo.addActionListener(this::mni_GuardarArchivoActionPerformed);
         mnu_Archivo.add(mni_GuardarArchivo);
 
         mni_CerrarArchivo.setText("Cerrar");
+        mni_CerrarArchivo.addActionListener(this::mni_CerrarArchivoActionPerformed);
         mnu_Archivo.add(mni_CerrarArchivo);
 
         mni_Salir.setText("Salir");
@@ -97,19 +106,20 @@ public class FormPrincipal extends javax.swing.JFrame {
 
         mnu_Campos.setText("Campos");
 
-        mni_AgregarCampo.setText("Agregar");
-        mnu_Campos.add(mni_AgregarCampo);
+        mni_CrearCampo.setText("Crear");
+        mni_CrearCampo.addActionListener(this::mni_CrearCampoActionPerformed);
+        mnu_Campos.add(mni_CrearCampo);
 
-        mni_RenombrarCampo.setText("Renombrar");
-        mnu_Campos.add(mni_RenombrarCampo);
+        mni_ListarCampo.setText("Listar");
+        mni_ListarCampo.addActionListener(this::mni_ListarCampoActionPerformed);
+        mnu_Campos.add(mni_ListarCampo);
 
-        mni_CambiarTipo.setText("Cambiar Tipo");
-        mnu_Campos.add(mni_CambiarTipo);
+        mni_ModificarCampo.setText("Modificar");
+        mni_ModificarCampo.addActionListener(this::mni_ModificarCampoActionPerformed);
+        mnu_Campos.add(mni_ModificarCampo);
 
-        mni_RedLongMax.setText("Reducir Longitud Maxima");
-        mnu_Campos.add(mni_RedLongMax);
-
-        mni_BorrarCampo.setText("Borrar Campo");
+        mni_BorrarCampo.setText("Borrar");
+        mni_BorrarCampo.addActionListener(this::mni_BorrarCampoActionPerformed);
         mnu_Campos.add(mni_BorrarCampo);
 
         mnuBar_Opciones.add(mnu_Campos);
@@ -179,10 +189,11 @@ public class FormPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void mni_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mni_SalirActionPerformed
-        // TODO add your handling code here:
+        System.exit(0);
     }//GEN-LAST:event_mni_SalirActionPerformed
 
     private void mni_CrearArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mni_CrearArchivoActionPerformed
+        /*
         Dlg_CrearArchivo dlg = new Dlg_CrearArchivo(this,true);
         dlg.setVisible(true);
         if (dlg.getValid()) {
@@ -191,7 +202,124 @@ public class FormPrincipal extends javax.swing.JFrame {
             PoliticaDeReutilizacion politica = dlg.getPolitica();
             crearArchivo(path.resolve(nombre+".dat"),politica);
         }
+        */
+        try {
+            String nombre = JOptionPane.showInputDialog(this, "Ingrese el nombre:");
+            if (nombre == null || nombre.trim().isEmpty()) {
+                return;
+            }
+            
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setFileSelectionMode(javax.swing.JFileChooser.DIRECTORIES_ONLY);
+
+            //fileChooser.setSelectedFile(new File(nombre.trim() + ".dat"));
+            
+            if (fileChooser.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
+                Path path = Path.of(fileChooser.getSelectedFile().getAbsolutePath());
+                path = path.resolve(nombre+".dat");
+                System.out.println(path);
+                File archivoFisico = new File(path.toString());
+                gestor.crearArchivo(archivoFisico, nombre.trim());
+                JOptionPane.showMessageDialog(this, "Archivo creado con exito! " + archivoFisico.getAbsolutePath());
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error al crear", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_mni_CrearArchivoActionPerformed
+
+    private void mni_CrearCampoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mni_CrearCampoActionPerformed
+        try {
+            String nombreCampo = JOptionPane.showInputDialog(this, "Nombre:");
+            if (nombreCampo == null || nombreCampo.trim().isEmpty()) return;
+            
+            TipoDato tipo = (TipoDato) JOptionPane.showInputDialog(this, "Seleccione el tipo de dato:", "Tipo", 
+                    JOptionPane.QUESTION_MESSAGE, null, TipoDato.values(), TipoDato.TEXTO);
+            
+            String lonStr = JOptionPane.showInputDialog(this, "Longitud máxima:");
+            int longitud = Integer.parseInt(lonStr);
+            
+            int obligatorioOpt = JOptionPane.showConfirmDialog(this, "¿Es obligatorio?", "Obligatorio", JOptionPane.YES_NO_OPTION);
+            boolean obligatorio = (obligatorioOpt == JOptionPane.YES_OPTION);
+            
+            int primariaOpt = JOptionPane.showConfirmDialog(this, "¿Es llave primaria?", "Llave Primaria", JOptionPane.YES_NO_OPTION);
+            boolean esLlavePrimaria = (primariaOpt == JOptionPane.YES_OPTION);
+
+            gestor.crearCampo(nombreCampo, tipo, longitud, obligatorio, esLlavePrimaria);
+            JOptionPane.showMessageDialog(this, "Campo agregado con éxito!");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error de validación", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_mni_CrearCampoActionPerformed
+
+    private void mni_ModificarCampoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mni_ModificarCampoActionPerformed
+        try {
+            String antiguo = JOptionPane.showInputDialog(this, "Nombre actual del campo a modificar:");
+            String nuevo = JOptionPane.showInputDialog(this, "Nuevo nombre:");
+            String lonStr = JOptionPane.showInputDialog(this, "Nueva longitud máxima:");
+            int nuevaLongitud = Integer.parseInt(lonStr);
+
+            gestor.modificarCampo(antiguo, nuevo, nuevaLongitud);
+            JOptionPane.showMessageDialog(this, "Campo modificado con éxito!");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_mni_ModificarCampoActionPerformed
+
+    private void mni_AbrirArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mni_AbrirArchivoActionPerformed
+        try {
+            JFileChooser fileChooser = new JFileChooser();
+            if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+                File archivoSeleccionado = fileChooser.getSelectedFile();
+                gestor.abrirArchivo(archivoSeleccionado);
+                JOptionPane.showMessageDialog(this, "Archivo abierto con exito!");
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error al abrir", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_mni_AbrirArchivoActionPerformed
+
+    private void mni_GuardarArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mni_GuardarArchivoActionPerformed
+        try {
+            gestor.guardarArchivo();
+            JOptionPane.showMessageDialog(this, "Cambios guardados con exito!");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error al guardar", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_mni_GuardarArchivoActionPerformed
+
+    private void mni_CerrarArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mni_CerrarArchivoActionPerformed
+        try {
+            gestor.cerrarArchivo();
+            JOptionPane.showMessageDialog(this, "Archivo cerrado con exito!");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_mni_CerrarArchivoActionPerformed
+
+    private void mni_ListarCampoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mni_ListarCampoActionPerformed
+        try {
+            var campos = gestor.listarCampos();
+            StringBuilder sb = new StringBuilder("Campos actuales:\n");
+            for (var c : campos) {
+                //sb.append("- ").append(c.getNombre()).append(" (").append(c.getTipo()).append(")\n");
+            }
+            JOptionPane.showMessageDialog(this, sb.toString());
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_mni_ListarCampoActionPerformed
+
+    private void mni_BorrarCampoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mni_BorrarCampoActionPerformed
+        try {
+            String nombre = JOptionPane.showInputDialog(this, "Nombre del campo a borrar:");
+            if (nombre != null && !nombre.trim().isEmpty()) {
+                gestor.borrarCampo(nombre);
+                JOptionPane.showMessageDialog(this, "Campo eliminado con exito!");
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_mni_BorrarCampoActionPerformed
 
     private void crearArchivo(Path directory, PoliticaDeReutilizacion politica){
         MetaData metaData = new MetaData(directory.toString(),politica);
@@ -225,25 +353,24 @@ public class FormPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem mni_AbrirArchivo;
-    private javax.swing.JMenuItem mni_AgregarCampo;
     private javax.swing.JMenuItem mni_ArbolB;
     private javax.swing.JMenuItem mni_AvailList;
     private javax.swing.JMenuItem mni_BorrarCampo;
     private javax.swing.JMenuItem mni_BorrarReg;
     private javax.swing.JMenuItem mni_BuscarReg;
-    private javax.swing.JMenuItem mni_CambiarTipo;
     private javax.swing.JMenuItem mni_CargarRegPrueba;
     private javax.swing.JMenuItem mni_CerrarArchivo;
     private javax.swing.JMenuItem mni_CrearArchivo;
+    private javax.swing.JMenuItem mni_CrearCampo;
     private javax.swing.JMenuItem mni_CruzarArchivos;
     private javax.swing.JMenuItem mni_GuardarArchivo;
     private javax.swing.JMenuItem mni_IntroducirReg;
     private javax.swing.JMenuItem mni_JSON;
+    private javax.swing.JMenuItem mni_ListarCampo;
     private javax.swing.JMenuItem mni_ListarReg;
     private javax.swing.JMenuItem mni_Mapa;
+    private javax.swing.JMenuItem mni_ModificarCampo;
     private javax.swing.JMenuItem mni_ModificarReg;
-    private javax.swing.JMenuItem mni_RedLongMax;
-    private javax.swing.JMenuItem mni_RenombrarCampo;
     private javax.swing.JMenuItem mni_Salir;
     private javax.swing.JMenuItem mni_XML;
     private javax.swing.JMenuBar mnuBar_Opciones;

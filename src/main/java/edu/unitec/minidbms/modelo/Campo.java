@@ -8,6 +8,9 @@ public class Campo {
     private String valorPred = "";
     private boolean esLlave;
 
+    public Campo(){
+        
+    }
     public Campo(String nombre, TipoDato tipoDato, int longitudMax, boolean obligatorio, String valorPred, boolean esLlave) {
         this.nombre = nombre;
         this.tipoDato = tipoDato;

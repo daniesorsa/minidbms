@@ -12,6 +12,10 @@ public class MetaData {
     private long registrosActivos = 0;
     private long registrosEliminados = 0;
     private long bytesLibres = 0;
+    
+    public MetaData(){
+        
+    }
     public MetaData(String archivo, PoliticaDeReutilizacion estrategia) {
         this.archivo = archivo;
         this.estrategia = estrategia;
@@ -57,5 +61,11 @@ public class MetaData {
         else {
             this.campos.remove(indiceCampo);
         }
+    }
+    public ArrayList<Campo> getCampos(){
+        return campos;
+    }
+    public void setNombreArchivo(String nombreTabla){
+        this.archivo = nombreTabla;
     }
 }
