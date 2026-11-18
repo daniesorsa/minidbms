@@ -37,7 +37,7 @@ public class MetaData {
         }
         if(esLlave) {
             this.campos.add(0, c);
-            IndiceDefinido nuevoIndice = new IndiceDefinido(nombre, 6, true, this.archivo);
+            IndiceDefinido nuevoIndice = new IndiceDefinido(nombre, 6, true, this.archivo + "_" + nombre + ".idx");
             this.indices.add(nuevoIndice);
             this.llaveEstablecida = true;
         }
@@ -65,10 +65,8 @@ public class MetaData {
     public ArrayList<Campo> getCampos(){
         return campos;
     }
-    public void setNombreArchivo(String nombreTabla){
-        this.archivo = nombreTabla;
-    }
-
+    
+    
     public String getArchivo() {
         return archivo;
     }
@@ -109,5 +107,28 @@ public class MetaData {
         return bytesLibres;
     }
     
+    public void setNombreArchivo(String nombreTabla){
+        this.archivo = nombreTabla;
+    }
+    
+    public void setLlaveEstablecida(boolean llaveEstablecida) {
+        this.llaveEstablecida = llaveEstablecida;
+    }
+
+    public void setCabeza(long cabeza) {
+        this.cabeza = cabeza;
+    }
+
+    public void setRegistrosActivos(long registrosActivos) {
+        this.registrosActivos = registrosActivos;
+    }
+
+    public void setRegistrosEliminados(long registrosEliminados) {
+        this.registrosEliminados = registrosEliminados;
+    }
+
+    public void setBytesLibres(long bytesLibres) {
+        this.bytesLibres = bytesLibres;
+    }
     
 }

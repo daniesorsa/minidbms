@@ -1,6 +1,7 @@
 package edu.unitec.minidbms.storage;
 import edu.unitec.minidbms.modelo.*;
 import java.io.ByteArrayOutputStream;
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -35,20 +36,74 @@ public class IOEncabezado {
         guardarArchivo();
     }
 
-    public void abrirArchivo(File archivo) throws Exception {
-        if (!archivo.exists()) {
-            throw new Exception("El archivo seleccionado no existe.");
+public void abrirArchivo(File archivo) throws Exception {
+        if (!archivo.exists() || archivo.length() < 12) {
+            throw new Exception("El archivo seleccionado no existe o está vacío.");
         }
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(archivo))) {
-            this.md = (MetaData) ois.readObject();
+        try (java.io.DataInputStream dis = new java.io.DataInputStream(new FileInputStream(archivo))) {
+            int numeroLeido = dis.readInt();
+            int versionLeida = dis.readInt();
+            int tamEncabezadoLeido = dis.readInt();
+
+            if (numeroLeido != NUMERO || versionLeida != VERSION) {
+                throw new Exception("Formato o versión de archivo incompatible.");
+            }
+
+            String nombreTabla = dis.readUTF();
+            boolean llaveEst = dis.readBoolean();
+            long cabeza = dis.readLong();
+            PoliticaDeReutilizacion politica = PoliticaDeReutilizacion.values()[dis.readInt()];
+            long regActivos = dis.readLong();
+            long regEliminados = dis.readLong();
+            long bytesLibres = dis.readLong();
+
+            MetaData nuevaMd = new MetaData(nombreTabla, politica);
+            nuevaMd.setLlaveEstablecida(llaveEst);
+            nuevaMd.setCabeza(cabeza);
+            nuevaMd.setRegistrosActivos(regActivos);
+            nuevaMd.setRegistrosEliminados(regEliminados);
+            nuevaMd.setBytesLibres(bytesLibres);
+
+            int cantCampos = dis.readInt();
+            for (int i = 0; i < cantCampos; i++) {
+                String nombreCampo = dis.readUTF();
+                TipoDato tipo = TipoDato.values()[dis.readInt()];
+                int longMax = dis.readInt();
+                boolean oblig = dis.readBoolean();
+                String valPred = dis.readUTF();
+                boolean esLlave = dis.readBoolean();
+
+                nuevaMd.getCampos().add(new Campo(nombreCampo, tipo, longMax, oblig, valPred, esLlave));
+            }
+
+            int cantIndices = dis.readInt();
+            for (int i = 0; i < cantIndices; i++) {
+                String campoIdx = dis.readUTF();
+                int orden = dis.readInt();
+                boolean unico = dis.readBoolean();
+                String archIdx = dis.readUTF();
+
+                nuevaMd.getIndices().add(new IndiceDefinido(campoIdx, orden, unico, archIdx));
+            }
+
+            int cantForaneas = dis.readInt();
+            for (int i = 0; i < cantForaneas; i++) {
+                String campoLocal = dis.readUTF();
+                String archRef = dis.readUTF();
+                String campoRef = dis.readUTF();
+
+                nuevaMd.getLlavesForaneas().add(new LlaveForanea(campoLocal, archRef, campoRef));
+            }
+
+            this.md = nuevaMd;
             this.archivoActual = archivo;
             this.modificado = false;
         } catch (Exception e) {
-            throw new Exception("El archivo está dañado o no existe");
+            throw new Exception("El archivo está dañado o tiene un formato inválido: " + e.getMessage());
         }
     }
 
-    public void guardarArchivo() throws Exception {
+public void guardarArchivo() throws Exception {
         if (this.archivoActual == null || this.md == null) {
             throw new Exception("No hay archivos abiertos");
         }
@@ -59,10 +114,11 @@ public class IOEncabezado {
         dos.writeInt(VERSION);
         dos.writeInt(TAM_ENCABEZADO);
 
+        // .ordinal para no enums
         dos.writeUTF(md.getArchivo());
         dos.writeBoolean(md.isLlaveEstablecida());
         dos.writeLong(md.getCabeza());
-        dos.writeInt(md.getEstrategia().hashCode());
+        dos.writeInt(md.getEstrategia().ordinal());
         dos.writeLong(md.getRegistrosActivos());
         dos.writeLong(md.getRegistrosEliminados());
         dos.writeLong(md.getBytesLibres());
@@ -70,28 +126,43 @@ public class IOEncabezado {
         dos.writeInt(md.getCampos().size());
         for (Campo c : md.getCampos()) {
             dos.writeUTF(c.getNombre());
-            dos.writeInt(c.getTipoDato().hashCode());
+            dos.writeInt(c.getTipoDato().ordinal());
             dos.writeInt(c.getLongitudMax());
             dos.writeBoolean(c.isObligatorio());
-            dos.writeUTF(c.getValorPred());
+            dos.writeUTF(c.getValorPred() != null ? c.getValorPred() : "");
             dos.writeBoolean(c.getEsLlave());
         }
         
+        // indices
         dos.writeInt(md.getIndices().size());
         for (IndiceDefinido ind : md.getIndices()) {
-            
+            dos.writeUTF(ind.getCampo());
+            dos.writeInt(ind.getOrden());
+            dos.writeBoolean(ind.isUnico());
+            dos.writeUTF(ind.getArchivoDeIndice());
         }
         
+        // llaves
         dos.writeInt(md.getLlavesForaneas().size());
         for (LlaveForanea lf : md.getLlavesForaneas()) {
-            
+            dos.writeUTF(lf.getCampoLocal());
+            dos.writeUTF(lf.getArchivoDeReferencia());
+            dos.writeUTF(lf.getCampoDeReferencia());
         }
+        dos.flush();
 
-//        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(this.archivoActual))) {
-//            oos.writeObject(this.metadataActual);
-//            this.modificado = false;
-//            System.out.println("Llega hasta el final");
-//        }
+        byte[] bytesMetadata = buffer.toByteArray();
+        if (bytesMetadata.length > TAM_ENCABEZADO) {
+            throw new Exception("La metadata excede el tamaño máximo del encabezado");
+        }
+        
+        byte[] bloqueFijo = new byte[TAM_ENCABEZADO];
+        System.arraycopy(bytesMetadata, 0, bloqueFijo, 0, bytesMetadata.length);
+
+        try (FileOutputStream fos = new FileOutputStream(this.archivoActual)) {
+            fos.write(bloqueFijo);
+            this.modificado = false;
+        }
     }
 
     public void cerrarArchivo() throws Exception {
@@ -106,56 +177,39 @@ public class IOEncabezado {
         this.modificado = false;
     }
 
-    public void crearCampo(String nombre, TipoDato tipo, int longitudMax, boolean obligatorio, boolean esLlavePrimaria) throws Exception {
+    public void crearCampo(String nombre, TipoDato tipo, int longitudMax, boolean obligatorio, String valorPred, boolean esLlavePrimaria) throws Exception {
         if (md == null) {
             throw new Exception("Debe crear o abrir un archivo primero");
         }
-        if (esLlavePrimaria) {
-            for (Campo c : md.getCampos()) {
-                if (c.getEsLlave()) {
-                    throw new Exception("Ya hay una llave primaria");
-                }
-            }
-        }
-        for (Campo c : md.getCampos()) {
-            if (c.getNombre().equalsIgnoreCase(nombre)) {
-                throw new Exception("Ya existe un campo con ese nombre");
-            }
-        }
-        Campo nuevoCampo = new Campo();
-        nuevoCampo.setNombre(nombre);
-        nuevoCampo.setTipoDato(tipo);
-        nuevoCampo.setLongitudMax(longitudMax);
-        nuevoCampo.setObligatorio(obligatorio);
-        nuevoCampo.setEsLlave(esLlavePrimaria);
         
-        md.getCampos().add(nuevoCampo);
+        md.agregarCampo(nombre, tipo, longitudMax, obligatorio, valorPred, esLlavePrimaria);
         this.modificado = true;
-    }
-
-    public List<Campo> listarCampos() throws Exception {
-        if (md == null) {
-            throw new Exception("No hay archivos abiertos");
-        }
-        return md.getCampos();
     }
 
     public void modificarCampo(String nombreAntiguo, String nuevoNombre, int nuevaLongitud) throws Exception {
         if (md == null) {
             throw new Exception("No hay archivos abiertos");
         }
-        Campo campoEncontrado = null;
-        for (Campo c : md.getCampos()) {
-            if (c.getNombre().equalsIgnoreCase(nombreAntiguo)) {
-                campoEncontrado = c;
+        int indice = -1;
+        for (int i = 0; i < md.getCampos().size(); i++) {
+            if (md.getCampos().get(i).getNombre().equalsIgnoreCase(nombreAntiguo)) {
+                indice = i;
                 break;
             }
         }
-        if (campoEncontrado == null) {
-            throw new Exception("No existe.");
+        if (indice == -1) {
+            throw new Exception("No existe el campo especificado.");
         }
-        campoEncontrado.setNombre(nuevoNombre);
-        campoEncontrado.setLongitudMax(nuevaLongitud);
+        // validar que el nuevo nombre no sea uno antiguo
+        if (!nombreAntiguo.equalsIgnoreCase(nuevoNombre)) {
+            for (Campo c : md.getCampos()) {
+                if (c.getNombre().equalsIgnoreCase(nuevoNombre)) {
+                    throw new Exception("Ya existe un campo con ese nuevo nombre.");
+                }
+            }
+            md.getCampos().get(indice).setNombre(nuevoNombre);
+        }
+        md.redcirLongitudMax(nuevaLongitud, indice);
         this.modificado = true;
     }
 
@@ -163,21 +217,21 @@ public class IOEncabezado {
         if (md == null) {
             throw new Exception("No hay archivos abiertos");
         }
-        Campo campoBorrar = null;
-        for (Campo c : md.getCampos()) {
-            if (c.getNombre().equalsIgnoreCase(nombreCampo)) {
-                campoBorrar = c;
-                break;
+        for (int i = 0; i < md.getCampos().size(); i++) {
+            if (md.getCampos().get(i).getNombre().equalsIgnoreCase(nombreCampo)) {
+                md.borrarCampo(i); // valida si es llave primaria y lo elimina en metadata
+                this.modificado = true;
+                return;
             }
         }
-        if (campoBorrar == null) {
-            throw new Exception("No existe");
+        throw new Exception("No existe el campo: " + nombreCampo);
+    }
+
+    public List<Campo> listarCampos() throws Exception {
+        if (md == null) {
+            throw new Exception("No hay archivos abiertos");
         }
-        if (campoBorrar.getEsLlave()) {
-            throw new Exception("No se puede borrar la llave primaria.");
-        }
-        md.getCampos().remove(campoBorrar);
-        this.modificado = true;
+        return md.getCampos();
     }
 
     public MetaData getMetadataActual() {
