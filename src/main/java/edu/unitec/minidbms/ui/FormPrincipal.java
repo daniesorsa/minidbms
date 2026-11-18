@@ -2,6 +2,7 @@ package edu.unitec.minidbms.ui;
 import edu.unitec.minidbms.modelo.*;
 import edu.unitec.minidbms.storage.IOEncabezado;
 import edu.unitec.minidbms.modelo.TipoDato;
+import edu.unitec.minidbms.modelo.Campo;
 import java.io.File;
 import java.nio.file.Path;
 import javax.swing.JFileChooser;
@@ -269,7 +270,7 @@ public class FormPrincipal extends javax.swing.JFrame {
             var campos = gestor.listarCampos();
             StringBuilder sb = new StringBuilder("Campos actuales:\n");
             for (var c : campos) {
-                //sb.append("- ").append(c.getNombre()).append(" (").append(c.getTipo()).append(")\n");
+                sb.append("- ").append(c.getNombre()).append(" (").append(c.getTipoDato()).append(")\n");
             }
             JOptionPane.showMessageDialog(this, sb.toString());
         } catch (Exception ex) {
