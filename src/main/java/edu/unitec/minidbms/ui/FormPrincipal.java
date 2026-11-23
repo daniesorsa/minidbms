@@ -20,15 +20,22 @@ public class FormPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        pnl_Fondo = new javax.swing.JPanel();
         tab_PanelDeArchivos = new javax.swing.JTabbedPane();
+        pnl_Fondo = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txt_camposAbiertos = new javax.swing.JTextArea();
+        btn_salir = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        txt_archivoAbierto = new javax.swing.JTextArea();
+        btn_abrirMenu = new javax.swing.JButton();
         mnuBar_Opciones = new javax.swing.JMenuBar();
         mnu_Archivo = new javax.swing.JMenu();
         mni_CrearArchivo = new javax.swing.JMenuItem();
         mni_AbrirArchivo = new javax.swing.JMenuItem();
         mni_GuardarArchivo = new javax.swing.JMenuItem();
         mni_CerrarArchivo = new javax.swing.JMenuItem();
-        mni_Salir = new javax.swing.JMenuItem();
         mnu_Campos = new javax.swing.JMenu();
         mni_CrearCampo = new javax.swing.JMenuItem();
         mni_ListarCampo = new javax.swing.JMenuItem();
@@ -50,19 +57,76 @@ public class FormPrincipal extends javax.swing.JFrame {
         mni_JSON = new javax.swing.JMenuItem();
         mni_XML = new javax.swing.JMenuItem();
 
+        tab_PanelDeArchivos.setBackground(new java.awt.Color(255, 204, 255));
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        tab_PanelDeArchivos.setBackground(new java.awt.Color(255, 204, 255));
+        jPanel1.setBackground(new java.awt.Color(255, 204, 255));
+
+        jLabel1.setText("Archivo Actual:");
+
+        txt_camposAbiertos.setColumns(20);
+        txt_camposAbiertos.setRows(5);
+        txt_camposAbiertos.setEnabled(false);
+        jScrollPane2.setViewportView(txt_camposAbiertos);
+
+        btn_salir.setText("Salir");
+        btn_salir.addActionListener(this::btn_salirActionPerformed);
+
+        txt_archivoAbierto.setColumns(20);
+        txt_archivoAbierto.setRows(5);
+        txt_archivoAbierto.setEnabled(false);
+        jScrollPane3.setViewportView(txt_archivoAbierto);
+
+        btn_abrirMenu.setText("Abrir Menú");
+        btn_abrirMenu.addActionListener(this::btn_abrirMenuActionPerformed);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btn_salir)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(btn_abrirMenu)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane3)))
+                .addGap(0, 42, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(61, 61, 61)
+                        .addComponent(jLabel1)
+                        .addGap(51, 51, 51))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_salir)
+                    .addComponent(btn_abrirMenu))
+                .addContainerGap(40, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout pnl_FondoLayout = new javax.swing.GroupLayout(pnl_Fondo);
         pnl_Fondo.setLayout(pnl_FondoLayout);
         pnl_FondoLayout.setHorizontalGroup(
             pnl_FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tab_PanelDeArchivos, javax.swing.GroupLayout.DEFAULT_SIZE, 570, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         pnl_FondoLayout.setVerticalGroup(
             pnl_FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tab_PanelDeArchivos, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         mnu_Archivo.setText("Archivo");
@@ -82,10 +146,6 @@ public class FormPrincipal extends javax.swing.JFrame {
         mni_CerrarArchivo.setText("Cerrar");
         mni_CerrarArchivo.addActionListener(this::mni_CerrarArchivoActionPerformed);
         mnu_Archivo.add(mni_CerrarArchivo);
-
-        mni_Salir.setText("Salir");
-        mni_Salir.addActionListener(this::mni_SalirActionPerformed);
-        mnu_Archivo.add(mni_Salir);
 
         mnuBar_Opciones.add(mnu_Archivo);
 
@@ -173,10 +233,6 @@ public class FormPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void mni_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mni_SalirActionPerformed
-        System.exit(0);
-    }//GEN-LAST:event_mni_SalirActionPerformed
-
     private void mni_CrearArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mni_CrearArchivoActionPerformed
         Dlg_CrearArchivo dlg = new Dlg_CrearArchivo(this,true);
         dlg.setVisible(true);
@@ -215,6 +271,7 @@ public class FormPrincipal extends javax.swing.JFrame {
 
             gestor.crearCampo(nombreCampo, tipo, longitud, obligatorio, "", esLlavePrimaria);
             JOptionPane.showMessageDialog(this, "Campo agregado con éxito!");
+            listado();
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Error de validación", JOptionPane.ERROR_MESSAGE);
         }
@@ -222,16 +279,16 @@ public class FormPrincipal extends javax.swing.JFrame {
 
     private void mni_ModificarCampoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mni_ModificarCampoActionPerformed
         try {
-            String antiguo = JOptionPane.showInputDialog(this, "Nombre actual del campo a modificar:");
+            String antiguo = JOptionPane.showInputDialog(this, "Nombre del campo a modificar:");
             String nuevo = JOptionPane.showInputDialog(this, "Nuevo nombre:");
-            String lonStr = JOptionPane.showInputDialog(this, "Nueva longitud máxima:");
-            int nuevaLongitud = Integer.parseInt(lonStr);
-
+            String longitud = JOptionPane.showInputDialog(this, "Nueva longitud máxima:");
+            int nuevaLongitud = Integer.parseInt(longitud);
             gestor.modificarCampo(antiguo, nuevo, nuevaLongitud);
             JOptionPane.showMessageDialog(this, "Campo modificado con éxito!");
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
+        listado();
     }//GEN-LAST:event_mni_ModificarCampoActionPerformed
 
     private void mni_AbrirArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mni_AbrirArchivoActionPerformed
@@ -241,6 +298,7 @@ public class FormPrincipal extends javax.swing.JFrame {
                 File archivoSeleccionado = fileChooser.getSelectedFile();
                 gestor.abrirArchivo(archivoSeleccionado);
                 JOptionPane.showMessageDialog(this, "Archivo abierto con exito!");
+                txt_archivoAbierto.setText(archivoSeleccionado.getName());
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Error al abrir", JOptionPane.ERROR_MESSAGE);
@@ -261,21 +319,27 @@ public class FormPrincipal extends javax.swing.JFrame {
             gestor.cerrarArchivo();
             JOptionPane.showMessageDialog(this, "Archivo cerrado con exito!");
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error al cerrar", JOptionPane.ERROR_MESSAGE);
         }
+        txt_archivoAbierto.setText("");
+        txt_camposAbiertos.setText("");
     }//GEN-LAST:event_mni_CerrarArchivoActionPerformed
 
-    private void mni_ListarCampoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mni_ListarCampoActionPerformed
+    private void listado(){
         try {
             var campos = gestor.listarCampos();
-            StringBuilder sb = new StringBuilder("Campos actuales:\n");
+            StringBuilder sb = new StringBuilder("");
             for (var c : campos) {
                 sb.append("- ").append(c.getNombre()).append(" (").append(c.getTipoDato()).append(")\n");
+                
             }
-            JOptionPane.showMessageDialog(this, sb.toString());
+            txt_camposAbiertos.setText(sb.toString());        
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
+    }
+    private void mni_ListarCampoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mni_ListarCampoActionPerformed
+        listado();
     }//GEN-LAST:event_mni_ListarCampoActionPerformed
 
     private void mni_BorrarCampoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mni_BorrarCampoActionPerformed
@@ -288,7 +352,16 @@ public class FormPrincipal extends javax.swing.JFrame {
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
+        listado();
     }//GEN-LAST:event_mni_BorrarCampoActionPerformed
+
+    private void btn_salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_salirActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_btn_salirActionPerformed
+
+    private void btn_abrirMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_abrirMenuActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_abrirMenuActionPerformed
 
     
     /**
@@ -317,6 +390,12 @@ public class FormPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_abrirMenu;
+    private javax.swing.JButton btn_salir;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JMenuItem mni_AbrirArchivo;
     private javax.swing.JMenuItem mni_ArbolB;
     private javax.swing.JMenuItem mni_AvailList;
@@ -336,7 +415,6 @@ public class FormPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem mni_Mapa;
     private javax.swing.JMenuItem mni_ModificarCampo;
     private javax.swing.JMenuItem mni_ModificarReg;
-    private javax.swing.JMenuItem mni_Salir;
     private javax.swing.JMenuItem mni_XML;
     private javax.swing.JMenuBar mnuBar_Opciones;
     private javax.swing.JMenu mnu_Archivo;
@@ -346,5 +424,7 @@ public class FormPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu mnu_Visualizar;
     private javax.swing.JPanel pnl_Fondo;
     private javax.swing.JTabbedPane tab_PanelDeArchivos;
+    private javax.swing.JTextArea txt_archivoAbierto;
+    private javax.swing.JTextArea txt_camposAbiertos;
     // End of variables declaration//GEN-END:variables
 }

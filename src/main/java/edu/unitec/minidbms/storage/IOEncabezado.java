@@ -27,10 +27,6 @@ public class IOEncabezado {
     }
 
     public void crearArchivo(File archivo, String nombreTabla,PoliticaDeReutilizacion politica) throws Exception {
-//        if (archivo.exists()) {
-//            throw new Exception("El archivo ya existe");
-//        }
-        //System.out.println(archivo.getAbsolutePath().toString());
         this.md = new MetaData(nombreTabla, politica);
         this.archivoActual = archivo;
         guardarArchivo();
@@ -198,13 +194,13 @@ public void guardarArchivo() throws Exception {
             }
         }
         if (indice == -1) {
-            throw new Exception("No existe el campo especificado.");
+            throw new Exception("No existe el campo");
         }
         // validar que el nuevo nombre no sea uno antiguo
         if (!nombreAntiguo.equalsIgnoreCase(nuevoNombre)) {
             for (Campo c : md.getCampos()) {
                 if (c.getNombre().equalsIgnoreCase(nuevoNombre)) {
-                    throw new Exception("Ya existe un campo con ese nuevo nombre.");
+                    throw new Exception("Ya existe un campo con ese nuevo nombre");
                 }
             }
             md.getCampos().get(indice).setNombre(nuevoNombre);
