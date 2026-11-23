@@ -165,7 +165,7 @@ public void guardarArchivo() throws Exception {
         if (this.modificado) {
             guardarArchivo();
         }
-        else {
+        if(md == null) {
             throw new Exception("Ningun archivo abierto o creado");
         }
         this.md = null;

@@ -13,6 +13,10 @@ public class FormPrincipal extends javax.swing.JFrame {
 
     public FormPrincipal() {
         initComponents();
+        mnu_Campos.setVisible(false);
+        mnu_Registros.setVisible(false);
+        mnu_Visualizar.setVisible(false);
+        mnu_Exportar.setVisible(false);
         this.gestor = new IOEncabezado();
     }
 
@@ -301,6 +305,7 @@ public class FormPrincipal extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Archivo abierto con exito!");
                 txt_archivoAbierto.setText(archivoSeleccionado.getName());
                 listado();
+                mostrarMenus(true);
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Error al abrir", JOptionPane.ERROR_MESSAGE);
@@ -320,6 +325,7 @@ public class FormPrincipal extends javax.swing.JFrame {
         try {
             gestor.cerrarArchivo();
             JOptionPane.showMessageDialog(this, "Archivo cerrado con exito!");
+            mostrarMenus(false);
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Error al cerrar", JOptionPane.ERROR_MESSAGE);
         }
@@ -364,6 +370,13 @@ public class FormPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_abrirMenuActionPerformed
 
+    private void mostrarMenus(boolean b){
+        mnu_Campos.setVisible(b);
+        mnu_Registros.setVisible(b);
+        mnu_Visualizar.setVisible(b);
+        mnu_Exportar.setVisible(b);
+
+    }
     
     /**
      * @param args the command line arguments
