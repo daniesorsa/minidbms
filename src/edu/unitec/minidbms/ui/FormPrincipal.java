@@ -74,6 +74,7 @@ public class FormPrincipal extends javax.swing.JFrame {
         btn_salir.addActionListener(this::btn_salirActionPerformed);
 
         txt_archivoAbierto.setColumns(20);
+        txt_archivoAbierto.setForeground(new java.awt.Color(0, 0, 0));
         txt_archivoAbierto.setRows(5);
         txt_archivoAbierto.setEnabled(false);
         jScrollPane3.setViewportView(txt_archivoAbierto);
@@ -330,10 +331,9 @@ public class FormPrincipal extends javax.swing.JFrame {
             var campos = gestor.listarCampos();
             StringBuilder sb = new StringBuilder("");
             for (var c : campos) {
-                sb.append("- ").append(c.getNombre()).append(" (").append(c.getTipoDato()).append(")\n");
-                
+                sb.append("- ").append(c.getNombre()).append(" (").append(c.getTipoDato()).append(")(").append(c.getLongitudMax()).append(")\n");
             }
-            txt_camposAbiertos.setText(sb.toString());        
+            txt_camposAbiertos.setText(sb.toString()); 
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
