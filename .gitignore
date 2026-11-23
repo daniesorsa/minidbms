@@ -1,12 +1,15 @@
-# Archivos compilados de Java
-target/
+# Archivos compilados de Java y Ant
 build/
+dist/
+target/
 *.class
 
 # Configuraciones locales de NetBeans
+nbproject/private/
 
-# Archivos binarios de prueba locales
-.dat
+# Archivos binarios de prueba locales (excepto los de Archivos de Prueba)
+*.dat
+!Archivos de Prueba/*.dat
 *.idx
 *.tmp
 
