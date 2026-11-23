@@ -300,6 +300,7 @@ public class FormPrincipal extends javax.swing.JFrame {
                 gestor.abrirArchivo(archivoSeleccionado);
                 JOptionPane.showMessageDialog(this, "Archivo abierto con exito!");
                 txt_archivoAbierto.setText(archivoSeleccionado.getName());
+                listado();
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Error al abrir", JOptionPane.ERROR_MESSAGE);
