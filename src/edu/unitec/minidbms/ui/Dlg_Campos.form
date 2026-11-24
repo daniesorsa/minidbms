@@ -57,10 +57,6 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="37" pref="37" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="btn_Crear" min="-2" pref="75" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          </Group>
                           <Group type="102" alignment="1" attributes="0">
                               <Group type="103" groupAlignment="1" attributes="0">
                                   <Component id="jLabel1" alignment="0" min="-2" pref="56" max="-2" attributes="0"/>
@@ -72,7 +68,7 @@
                               <Group type="103" groupAlignment="1" attributes="0">
                                   <Component id="txt_valorPred" alignment="1" max="32767" attributes="0"/>
                                   <Component id="spn_longitudMaxCrear" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="cmb_tipoDatoCrear" alignment="0" pref="155" max="32767" attributes="0"/>
+                                  <Component id="cmb_tipoDatoCrear" alignment="0" pref="156" max="32767" attributes="0"/>
                                   <Component id="txt_nombreCrear" alignment="1" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
@@ -82,6 +78,10 @@
                                   <Component id="cb_obligatoria" alignment="0" min="-2" pref="104" max="-2" attributes="0"/>
                                   <Component id="cb_llavePrimaria" min="-2" pref="119" max="-2" attributes="0"/>
                               </Group>
+                              <EmptySpace max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="btn_Crear" min="-2" pref="75" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
@@ -146,6 +146,9 @@
                   <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(TipoDato.values())" type="code"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmb_tipoDatoCrearActionPerformed"/>
+              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;TipoDato&gt;"/>
               </AuxValues>
@@ -331,6 +334,9 @@
                   <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(TipoDato.values())" type="code"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmb_tipoDatoActionPerformed"/>
+              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;TipoDato&gt;"/>
               </AuxValues>

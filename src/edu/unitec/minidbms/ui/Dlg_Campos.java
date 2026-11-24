@@ -78,6 +78,7 @@ public class Dlg_Campos extends javax.swing.JDialog {
         jLabel3.setText("Longitud Maxima:");
 
         cmb_tipoDatoCrear.setModel(new javax.swing.DefaultComboBoxModel<>(TipoDato.values()));
+        cmb_tipoDatoCrear.addActionListener(this::cmb_tipoDatoCrearActionPerformed);
 
         spn_longitudMaxCrear.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
 
@@ -97,9 +98,6 @@ public class Dlg_Campos extends javax.swing.JDialog {
             .addGroup(pnl_CrearLayout.createSequentialGroup()
                 .addGap(37, 37, 37)
                 .addGroup(pnl_CrearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnl_CrearLayout.createSequentialGroup()
-                        .addComponent(btn_Crear, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_CrearLayout.createSequentialGroup()
                         .addGroup(pnl_CrearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -110,13 +108,16 @@ public class Dlg_Campos extends javax.swing.JDialog {
                         .addGroup(pnl_CrearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txt_valorPred)
                             .addComponent(spn_longitudMaxCrear, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cmb_tipoDatoCrear, javax.swing.GroupLayout.Alignment.LEADING, 0, 155, Short.MAX_VALUE)
+                            .addComponent(cmb_tipoDatoCrear, javax.swing.GroupLayout.Alignment.LEADING, 0, 156, Short.MAX_VALUE)
                             .addComponent(txt_nombreCrear))
                         .addGap(73, 73, 73))
                     .addGroup(pnl_CrearLayout.createSequentialGroup()
                         .addGroup(pnl_CrearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cb_obligatoria, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cb_llavePrimaria, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(pnl_CrearLayout.createSequentialGroup()
+                        .addComponent(btn_Crear, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         pnl_CrearLayout.setVerticalGroup(
@@ -177,6 +178,7 @@ public class Dlg_Campos extends javax.swing.JDialog {
     btn_modificar.addActionListener(this::btn_modificarActionPerformed);
 
     cmb_tipoDato.setModel(new javax.swing.DefaultComboBoxModel<>(TipoDato.values()));
+    cmb_tipoDato.addActionListener(this::cmb_tipoDatoActionPerformed);
 
     spn_longitudMax.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
 
@@ -306,7 +308,26 @@ public class Dlg_Campos extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Error de validación", JOptionPane.ERROR_MESSAGE);
         }
         lst_campos.repaint();
+        System.exit(0);
     }//GEN-LAST:event_btn_CrearActionPerformed
+
+    private void cmb_tipoDatoCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_tipoDatoCrearActionPerformed
+        if (!cmb_tipoDatoCrear.getSelectedItem().toString().equals("TEXTO")){
+            spn_longitudMaxCrear.setVisible(false);
+        }
+        else{
+            spn_longitudMaxCrear.setVisible(true);
+        }
+    }//GEN-LAST:event_cmb_tipoDatoCrearActionPerformed
+
+    private void cmb_tipoDatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_tipoDatoActionPerformed
+        if (!cmb_tipoDato.getSelectedItem().toString().equals("TEXTO")){
+            spn_longitudMax.setVisible(false);
+        }
+        else{
+            spn_longitudMax.setVisible(true);
+        }        
+    }//GEN-LAST:event_cmb_tipoDatoActionPerformed
 
     /**
      * @param args the command line arguments
