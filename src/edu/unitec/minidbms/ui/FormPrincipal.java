@@ -338,7 +338,11 @@ public class FormPrincipal extends javax.swing.JFrame {
             var campos = gestor.listarCampos();
             StringBuilder sb = new StringBuilder("");
             for (var c : campos) {
-                sb.append("- ").append(c.getNombre()).append(" (").append(c.getTipoDato()).append(")(").append(c.getLongitudMax()).append(")\n");
+                sb.append("- ").append(c.getNombre()).append(" (").append(c.getTipoDato()).append(")");
+                if(c.getTipoDato().toString().equals("TEXTO")){
+                    sb.append("(").append(c.getLongitudMax()).append(")");
+                }
+                sb.append("\n");
             }
             txt_camposAbiertos.setText(sb.toString()); 
         } catch (Exception ex) {
@@ -375,7 +379,6 @@ public class FormPrincipal extends javax.swing.JFrame {
         mnu_Registros.setVisible(b);
         mnu_Visualizar.setVisible(b);
         mnu_Exportar.setVisible(b);
-
     }
     
     /**
