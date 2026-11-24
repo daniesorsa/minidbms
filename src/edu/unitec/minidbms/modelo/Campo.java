@@ -74,6 +74,9 @@ public class Campo {
         this.esLlave = esLlave;
     }
     
-    
+    @Override
+    public String toString(){
+        return nombre;
+    }
     
 }

@@ -41,6 +41,7 @@ public class FormPrincipal extends javax.swing.JFrame {
         mni_GuardarArchivo = new javax.swing.JMenuItem();
         mni_CerrarArchivo = new javax.swing.JMenuItem();
         mnu_Campos = new javax.swing.JMenu();
+        mni_MenuCampos = new javax.swing.JMenuItem();
         mni_CrearCampo = new javax.swing.JMenuItem();
         mni_ListarCampo = new javax.swing.JMenuItem();
         mni_ModificarCampo = new javax.swing.JMenuItem();
@@ -155,6 +156,10 @@ public class FormPrincipal extends javax.swing.JFrame {
         mnuBar_Opciones.add(mnu_Archivo);
 
         mnu_Campos.setText("Campos");
+
+        mni_MenuCampos.setText("Menu Campos");
+        mni_MenuCampos.addActionListener(this::mni_MenuCamposActionPerformed);
+        mnu_Campos.add(mni_MenuCampos);
 
         mni_CrearCampo.setText("Crear");
         mni_CrearCampo.addActionListener(this::mni_CrearCampoActionPerformed);
@@ -374,6 +379,12 @@ public class FormPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_abrirMenuActionPerformed
 
+    private void mni_MenuCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mni_MenuCamposActionPerformed
+        Dlg_Campos menuCampos = new Dlg_Campos(this,true);
+        menuCampos.setVisible(true);
+        listado();
+    }//GEN-LAST:event_mni_MenuCamposActionPerformed
+
     private void mostrarMenus(boolean b){
         mnu_Campos.setVisible(b);
         mnu_Registros.setVisible(b);
@@ -381,6 +392,9 @@ public class FormPrincipal extends javax.swing.JFrame {
         mnu_Exportar.setVisible(b);
     }
     
+    public IOEncabezado getArchivo(){
+        return gestor;
+    }
     /**
      * @param args the command line arguments
      */
@@ -430,6 +444,7 @@ public class FormPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem mni_ListarCampo;
     private javax.swing.JMenuItem mni_ListarReg;
     private javax.swing.JMenuItem mni_Mapa;
+    private javax.swing.JMenuItem mni_MenuCampos;
     private javax.swing.JMenuItem mni_ModificarCampo;
     private javax.swing.JMenuItem mni_ModificarReg;
     private javax.swing.JMenuItem mni_XML;

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JDialogFormInfo">
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JDialogFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
   </Properties>
@@ -49,15 +49,135 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="420" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="37" pref="37" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="btn_Crear" min="-2" pref="75" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="jLabel1" alignment="0" min="-2" pref="56" max="-2" attributes="0"/>
+                                  <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel3" alignment="0" min="-2" pref="104" max="-2" attributes="0"/>
+                                  <Component id="jLabel2" alignment="0" min="-2" pref="81" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="txt_valorPred" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="spn_longitudMaxCrear" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="cmb_tipoDatoCrear" alignment="0" pref="155" max="32767" attributes="0"/>
+                                  <Component id="txt_nombreCrear" alignment="1" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="cb_obligatoria" alignment="0" min="-2" pref="104" max="-2" attributes="0"/>
+                                  <Component id="cb_llavePrimaria" min="-2" pref="119" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
+                  </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="311" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txt_nombreCrear" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cmb_tipoDatoCrear" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="spn_longitudMaxCrear" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txt_valorPred" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="cb_obligatoria" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="cb_llavePrimaria" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="23" max="32767" attributes="0"/>
+                      <Component id="btn_Crear" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                  </Group>
               </Group>
             </DimensionLayout>
           </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JLabel" name="jLabel1">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Nombre:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel2">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Tipo Dato:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel3">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Longitud Maxima:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="txt_nombreCrear">
+            </Component>
+            <Component class="javax.swing.JComboBox" name="cmb_tipoDatoCrear">
+              <Properties>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(TipoDato.values())" type="code"/>
+                </Property>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;TipoDato&gt;"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JSpinner" name="spn_longitudMaxCrear">
+              <Properties>
+                <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+                  <SpinnerModel initial="0" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JCheckBox" name="cb_obligatoria">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Obligatoria"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JCheckBox" name="cb_llavePrimaria">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Llave Primaria"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="btn_Crear">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Crear"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_CrearActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel4">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Valor Predeterminado:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="txt_valorPred">
+            </Component>
+          </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="pnl_Modificar">
           <Constraints>
@@ -77,24 +197,22 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jScrollPane1" min="-2" pref="116" max="-2" attributes="0"/>
                               <EmptySpace min="28" pref="28" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                          <Component id="btn_modificar" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="lbl_LongitudMax" alignment="0" max="32767" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="spn_longitudMax" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                      <Component id="btn_modificar" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="lbl_LongitudMax" alignment="0" max="32767" attributes="0"/>
                                   </Group>
+                                  <Component id="lbl_Nombre" alignment="0" min="-2" pref="59" max="-2" attributes="0"/>
+                                  <Component id="lbl_TipoDato" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="spn_longitudMax" alignment="0" max="32767" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="lbl_Nombre" alignment="0" min="-2" pref="59" max="-2" attributes="0"/>
-                                          <Component id="lbl_TipoDato" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+                                      <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                           <Component id="txt_nombre" max="32767" attributes="0"/>
-                                          <Component id="cmb_tipoDato" pref="119" max="32767" attributes="0"/>
+                                          <Component id="cmb_tipoDato" min="-2" pref="119" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -104,7 +222,7 @@
                               <Component id="btn_Borrar" min="-2" pref="75" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="39" max="32767" attributes="0"/>
+                      <EmptySpace pref="27" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -148,15 +266,18 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JList" name="lst_Campos">
+                <Component class="javax.swing.JList" name="lst_campos">
                   <Properties>
-                    <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
-                      <StringArray count="0"/>
+                    <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="new javax.swing.AbstractListModel&lt;Campo&gt;(){&#xd;&#xa;    @Override&#xd;&#xa;    public int getSize() { return campos.size(); }&#xd;&#xa;&#xd;&#xa;    @Override&#xd;&#xa;    public Campo getElementAt(int i) { return campos.get(i); }&#xd;&#xa;    &#xd;&#xa;}&#xd;&#xa;" type="code"/>
                     </Property>
                     <Property name="selectionMode" type="int" value="0"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="valueChanged" listener="javax.swing.event.ListSelectionListener" parameters="javax.swing.event.ListSelectionEvent" handler="lst_camposValueChanged"/>
+                  </Events>
                   <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                    <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Campo&gt;"/>
                   </AuxValues>
                 </Component>
               </SubComponents>
@@ -165,6 +286,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Borrar"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_BorrarActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="lbl_Nombre">
               <Properties>
@@ -187,6 +311,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Modificar"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_modificarActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JComboBox" name="cmb_tipoDato">
               <Properties>
@@ -199,6 +326,11 @@
               </AuxValues>
             </Component>
             <Component class="javax.swing.JSpinner" name="spn_longitudMax">
+              <Properties>
+                <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+                  <SpinnerModel initial="0" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
+                </Property>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>
