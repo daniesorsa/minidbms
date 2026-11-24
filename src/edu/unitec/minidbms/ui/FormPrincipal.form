@@ -57,14 +57,6 @@
             <Property name="text" type="java.lang.String" value="Campos"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="mni_MenuCampos">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Menu Campos"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mni_MenuCamposActionPerformed"/>
-              </Events>
-            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="mni_CrearCampo">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Crear"/>

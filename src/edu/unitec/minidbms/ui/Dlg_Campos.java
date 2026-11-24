@@ -69,6 +69,8 @@ public class Dlg_Campos extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        pnl_Crear.setBackground(new java.awt.Color(255, 102, 204));
+
         jLabel1.setText("Nombre:");
 
         jLabel2.setText("Tipo Dato:");
@@ -146,6 +148,8 @@ public class Dlg_Campos extends javax.swing.JDialog {
         );
 
         jTabbedPane1.addTab("Crear", pnl_Crear);
+
+        pnl_Modificar.setBackground(new java.awt.Color(255, 153, 255));
 
         lst_campos.setModel(new javax.swing.AbstractListModel<Campo>(){
             @Override
@@ -256,7 +260,8 @@ public class Dlg_Campos extends javax.swing.JDialog {
         }
         catch(Exception ex){
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        }
+        }                    
+        lst_campos.repaint();
     }//GEN-LAST:event_btn_modificarActionPerformed
 
     private void btn_BorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_BorrarActionPerformed
@@ -274,6 +279,7 @@ public class Dlg_Campos extends javax.swing.JDialog {
             indiceSeleccionado = -1;
             lst_campos.repaint();
         }
+        
     }//GEN-LAST:event_btn_BorrarActionPerformed
 
     private void lst_camposValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lst_camposValueChanged
@@ -299,6 +305,7 @@ public class Dlg_Campos extends javax.swing.JDialog {
         catch(Exception ex){
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Error de validación", JOptionPane.ERROR_MESSAGE);
         }
+        lst_campos.repaint();
     }//GEN-LAST:event_btn_CrearActionPerformed
 
     /**
