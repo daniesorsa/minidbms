@@ -31,6 +31,7 @@ public class Dlg_CrearArchivo extends javax.swing.JDialog {
         btn_Cancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Crear Archivo");
 
         lbl_Nombre.setText("Nombre:");
 

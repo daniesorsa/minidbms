@@ -64,6 +64,7 @@ public class FormPrincipal extends javax.swing.JFrame {
         tab_PanelDeArchivos.setBackground(new java.awt.Color(255, 204, 255));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Mini DBMS");
 
         jPanel1.setBackground(new java.awt.Color(255, 204, 255));
 
